@@ -23,6 +23,7 @@ function Run() {
   //console.log(m);
   var list = [];
   for (var k in m) {
+    if (m[k].score <= 0) continue;
     list.push([k.split(" ").join(""),
       {score:m[k].score,freq:m[k].freq,poly:m[k].poly,flex:m[k].flex}]);
   }
