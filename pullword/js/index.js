@@ -19,19 +19,7 @@ function Run() {
   $('#editor_holder').html("<h4>loading...</h4>");
   $("#visual").html("<h4>loading...</h4>");
   var input = $('#input').val().trim();
-  var m = pullword(input);
-  //console.log(m);
-  var list = [];
-  for (var k in m) {
-    if (m[k].score <= 0) continue;
-    list.push([k.split(" ").join(""),
-      {score:m[k].score,freq:m[k].freq,poly:m[k].poly,flex:m[k].flex}]);
-  }
-  list.sort(function(b, a) {
-    return a[1].score - b[1].score;
-  });
-  //console.log(list);
-  list = list.slice(0, 100);
+  var list = getWords(input);
   $('#editor_holder').jsonview(list);
   visual(list);
 }

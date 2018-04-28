@@ -1,3 +1,13 @@
+/**
+ * Pullword: A unsupervised method for New Word Detection, as described in
+ *            http://www.matrix67.com/blog/archives/5044
+ * =============================================================================
+ *
+ *
+ * @author liang@zliu.org
+ * @license MIT
+ */
+
 function pullword(input) {
   var sentences = Unistring.getSentences(input);
   var total = 0;
@@ -90,8 +100,6 @@ function getNGram(min, max, s) {
     for (var j = min; j <= max; j++) {
       if (i+j > words.length) break;
       var k = words.slice(i, i+j).join(" ");
-      //console.log(words.slice(i, i+j));
-      //console.log(k);
       if (dict[k] == undefined) {
         dict[k] = {freq:0,poly:0,flex:0,score:0,left:{},right:{}};
       }
@@ -113,4 +121,22 @@ function getNGram(min, max, s) {
     }
   }
   return {cnt: words.length, dict: dict};
+}
+
+function getWords(input) {
+  var input = $('#input').val().trim();
+  var m = pullword(input);
+  //console.log(m);
+  var list = [];
+  for (var k in m) {
+    if (m[k].score <= 0) continue;
+    list.push([k.split(" ").join(""),
+      {score:m[k].score,freq:m[k].freq,poly:m[k].poly,flex:m[k].flex}]);
+  }
+  list.sort(function(b, a) {
+    return a[1].score - b[1].score;
+  });
+  //console.log(list);
+  list = list.slice(0, 100);
+  return list;
 }
