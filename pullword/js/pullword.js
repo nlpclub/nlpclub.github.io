@@ -9,8 +9,7 @@
  */
 
  (function (global) {
- 	'use strict';
-
+  'use strict';
   var Pullword = {
     pullword: function(input) {
       var sentences = Unistring.getSentences(input);
@@ -71,8 +70,7 @@
           }
         }
 
-        m[k].flex = Math.min(
-          Pullword.entropy(m[k].left),
+        m[k].flex = Math.min(Pullword.entropy(m[k].left),
           Pullword.entropy(m[k].right));
         m[k].score = m[k].freq * m[k].poly * m[k].flex;
       }
@@ -146,11 +144,13 @@
       return list;
     }
   };
+
+  // exporting
   if (typeof module !== 'undefined' && typeof exports !== 'undefined') {
-		module.exports = Pullword;
-	}
-	else {
-		global.Pullword = Pullword;
-	}
+    module.exports = Pullword;
+  }
+  else {
+    global.Pullword = Pullword;
+  }
 
 })(this);
