@@ -123,7 +123,7 @@ function getNGram(min, max, s) {
   return {cnt: words.length, dict: dict};
 }
 
-function getWords(input) {
+function getWords(input, num) {
   var input = $('#input').val().trim();
   var m = pullword(input);
   //console.log(m);
@@ -137,6 +137,6 @@ function getWords(input) {
     return a[1].score - b[1].score;
   });
   //console.log(list);
-  list = list.slice(0, 100);
+  list = list.slice(0, num);
   return list;
 }

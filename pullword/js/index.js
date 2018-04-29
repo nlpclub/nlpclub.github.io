@@ -19,7 +19,7 @@ function Run() {
   $('#editor_holder').html("<h4>loading...</h4>");
   $("#visual").html("<h4>loading...</h4>");
   var input = $('#input').val().trim();
-  var list = getWords(input);
+  var list = getWords(input, 100);
   $('#editor_holder').jsonview(list);
   visual(list);
 }
